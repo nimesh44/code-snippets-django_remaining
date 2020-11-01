@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block main %}
+    <h2>This is Employeer page</h2>
+        <div class="text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New
+        </button>
+    </div>
+
+    <form action="" method="POST">
+    {% csrf_token%}
+
+    <div class="card">
+      <div class="card-header">
+        Employeer Details
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th scope="col">Mobile No</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for employeer in employeers %}
+            <tr>
+              <th scope="row">{{employeer.id}}</th>
+                <td>{{ employeer.first_name }}</td>
+                <td>{{ employeer.last_name }}</td>
+                <td>{{ employeer.email }}</td>
+                <td>{{ employeer.mobile }}</td>
+                <td>{{ employeer.address }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <!-- {{form}} -->
+              {{ form|crispy }}
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    </form>
+
+
+
+      <!-- <form action="{% url "about" %}" method="POST">
+        <div class="col-md-7">
+        {% csrf_token%}
+        {{ form|crispy }}
+        </div>
+
+      <button type="submit" class="btn btn-outline-info">Submit</button>
+    </form> -->
+
+
+    <!--     <form action="{% url "about" %}" method="POST">
+            {% csrf_token%}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="check" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-outline-info">Submit</button>
+    </form> -->
+
+{% endblock main %}
