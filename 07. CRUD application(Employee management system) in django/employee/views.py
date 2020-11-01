@@ -92,3 +92,29 @@ def about(request):
 
 def contact(request):
     return render(request,'contact.html')
+
+
+# one way of of getting id/any other info is
+# def employee_update(request,**kwar):
+# Alternative way
+def employee_update(request,id):
+    employee_obj = Employee.objects.get(id=id)
+    # print(id)
+    # print(employee_obj.first_name)
+    if request.method == 'POST':
+        employee_obj.first_name = request.POST['first_name']
+        employee_obj.last_name = request.POST['last_name']
+        employee_obj.email = request.POST['email']
+        employee_obj.mobile = request.POST['mobile']
+        employee_obj.address = request.POST['address']
+        employee_obj.save()
+        # print(employee_obj.first_name)
+        return redirect('employee-home')
+
+    context={
+        'employee':employee_obj,
+    }
+
+
+
+    return render(request,'employee/employee_update.html',context)

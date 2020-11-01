@@ -25,6 +25,7 @@
               <th scope="col">Email</th>
               <th scope="col">Mobile No</th>
               <th scope="col">Address</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -36,6 +37,10 @@
                 <td>{{ employee.email }}</td>
                 <td>{{ employee.mobile }}</td>
                 <td>{{ employee.address }}</td>
+                <td>
+                <a class="btn btn-outline-info btn-sm" href="{% url 'employee-update' employee.id %}">Update</a>
+                <a class="btn btn-danger btn-sm" href="">Delete</a>
+              </td>
               </tr>
             {% endfor %}
 
