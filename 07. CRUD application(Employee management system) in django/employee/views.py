@@ -114,7 +114,17 @@ def employee_update(request,id):
     context={
         'employee':employee_obj,
     }
-
-
-
     return render(request,'employee/employee_update.html',context)
+
+
+def employee_delete(request,id):
+    employee_object = Employee.objects.get(id=id)
+
+    if request.method == 'POST':
+        employee_object.delete()
+        return redirect('employee-home')
+
+    context ={
+        'employee':employee_object
+    }
+    return render(request,'employee/employee_delete.html',context)

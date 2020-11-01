@@ -39,7 +39,7 @@
                 <td>{{ employee.address }}</td>
                 <td>
                 <a class="btn btn-outline-info btn-sm" href="{% url 'employee-update' employee.id %}">Update</a>
-                <a class="btn btn-danger btn-sm" href="">Delete</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'employee-delete' employee.id%}">Delete</a>
               </td>
               </tr>
             {% endfor %}
@@ -98,11 +98,5 @@
      </div>
     </div>
     </form>
-
-    <p>Welcome {{ceo.name}}, you are appointed as ceo
-        <br>
-    Being {{ceo.gender}} you have challanges too.</p>
-
-    <p>Welcome our human resource manager {{hr.name}}</p>
 
 {% endblock main %}
