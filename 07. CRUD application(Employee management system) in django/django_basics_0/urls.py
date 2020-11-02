@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.http import HttpResponse
-from employeer.views import employeer
+from employeer.views import employeer,employeer_add,employeer_update,employeer_delete
 # from employee.views import employee
 
 
@@ -29,5 +29,8 @@ urlpatterns = [
     # path('',home),
     path('',include('employee.urls')),
     # path('employee/',include('employee.urls')),
-    path('employeer/',employeer,name="employeer-home")
+    path('employeer/',employeer,name="employeer-home"),
+    path('employeer/employeer_add/',employeer_add,name="employeer-add"),
+    path('employeer/employeer_update/<int:id>/',employeer_update,name="employeer-update"),
+    path('employeer/employeer_delete/<int:id>/',employeer_delete,name="employeer-delete"),
 ]

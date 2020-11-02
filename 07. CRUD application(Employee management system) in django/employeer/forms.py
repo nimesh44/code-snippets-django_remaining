@@ -13,3 +13,5 @@ class EmployeerForm(ModelForm):
     class Meta:
         model = Employeer
         fields = ['first_name','last_name','email','mobile','address']
+        # To get all fields do
+        # fields = '__all__'

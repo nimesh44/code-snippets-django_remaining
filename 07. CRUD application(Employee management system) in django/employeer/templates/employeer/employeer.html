@@ -3,8 +3,8 @@
 {% block main %}
     <h2>This is Employeer page</h2>
         <div class="text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New
-        </button>
+        <a href="{% url "employeer-add" %}" class="btn btn-primary" >Add New
+        </a>
     </div>
 
     <form action="" method="POST">
@@ -24,6 +24,7 @@
               <th scope="col">Email</th>
               <th scope="col">Address</th>
               <th scope="col">Mobile No</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -35,6 +36,11 @@
                 <td>{{ employeer.email }}</td>
                 <td>{{ employeer.mobile }}</td>
                 <td>{{ employeer.address }}</td>
+                <td><a class="btn btn-outline-info btn-sm" href="{% url 'employeer-update' employeer.id %}">Update</a>
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'employeer-delete' employeer.id %}">Delete</a>
+
+
+                </td>
             </tr>
             {% endfor %}
 
@@ -45,7 +51,7 @@
     </div>
 
 
-    <!-- Modal -->
+<!--
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -56,7 +62,7 @@
             </button>
           </div>
           <div class="modal-body">
-              <!-- {{form}} -->
+
               {{ form|crispy }}
 
 
@@ -68,7 +74,7 @@
       </div>
      </div>
     </div>
-    </form>
+    </form> -->
 
 
 

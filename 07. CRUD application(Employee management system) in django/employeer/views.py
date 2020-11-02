@@ -46,3 +46,44 @@ def employeer(request):
     #     return render(request,'employeer/employeer.html')
     # else:
     #     return render(request,'employeer/employeer.html')
+
+
+def employeer_add(request):
+    form = EmployeerForm()
+    if request.method == 'POST':
+        employeer_data = EmployeerForm(request.POST)
+        if employeer_data.is_valid():
+            employeer_data.save()
+            return redirect('employeer-home')
+
+    context = {
+    'form':form,
+    'action':'Add New employeer'
+    }
+    return render(request,'employeer/employeer_add.html',context)
+
+def employeer_update(request,id):
+    instance  = Employeer.objects.get(id=id)
+    form = EmployeerForm(instance=instance)
+    if request.method == 'POST':
+        form_data = EmployeerForm(request.POST,instance = instance)
+        if form_data.is_valid():
+            form_data.save()
+            return redirect('employeer-home')
+    context = {
+    'form':form,
+    'action':'Update Employeer Details'
+    }
+    # Using template similar to add for update employeer
+    return render(request,'employeer/employeer_add.html',context)
+
+def employeer_delete(request,id):
+    employeer_instance = Employeer.objects.get(id=id)
+    if request.method == 'POST':
+        employeer_instance.delete()
+        return redirect('employeer-home')
+
+    context ={
+        'employeer': employeer_instance,
+        }
+    return render(request,'employeer/employeer_delete.html',context)

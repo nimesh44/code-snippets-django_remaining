@@ -2,13 +2,21 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import EmployeeForm
 from .models import Employee
+from employeer.models import Employeer
 
 
 # Create your views here.
 
 
 def home(request):
-    return render(request,'home.html')
+    employee_count = Employee.objects.all().count()
+    employeer_count = Employeer.objects.all().count()
+
+    context={
+        'employee_count': employee_count,
+        'employeer_count': employeer_count,
+    }
+    return render(request,'home.html',context)
 
 # context = {
 #     'ceo':{
