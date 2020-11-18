@@ -1,0 +1,31 @@
+{% extends "base.html"%}
+
+{% block main %}
+    <div class="card">
+      <div class="card-header">
+        Employee and Employeer Details:
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Employee</h5>
+                <p class="card-text">There are {{employee_count}} employee.</p>
+                <a href="{% url 'employee-home' %}"  class="btn btn-primary">Go Employee</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Employeer</h5>
+                <p class="card-text">We have {{employeer_count}} employeer clients.</p>
+                <a href="{% url 'employeer-home' %}" class="btn btn-primary">Go Employeer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

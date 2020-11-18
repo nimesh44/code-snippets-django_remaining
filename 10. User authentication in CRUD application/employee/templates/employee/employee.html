@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Welcome to Employee page</h2>
+
+    <div class="text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New
+        </button>
+    </div>
+
+    <form action="" method="POST">
+    {% csrf_token%}
+
+    <div class="card">
+      <div class="card-header">
+        Employee Details
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile No</th>
+              <th scope="col">Address</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for employee in employees %}
+              <tr>
+                <th scope="row">{{employee.id}}</th>
+                <td>{{ employee.first_name }}</td>
+                <td>{{ employee.last_name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.mobile }}</td>
+                <td>{{ employee.address }}</td>
+                <td>
+                <a class="btn btn-outline-info btn-sm" href="{% url 'employee-update' employee.id %}">Update</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'employee-delete' employee.id%}">Delete</a>
+              </td>
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <!-- {{form}} -->
+              <div class="form-group">
+                <label >First Name</label>
+                <input type="text" class="form-control"  placeholder="First Name" name="first_name">
+              </div>
+              <div class="form-group">
+                <label >Last Name</label>
+                <input type="text" class="form-control"  placeholder="Last Name" name="last_name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="eg: abc@gmail.com" name="email">
+              </div>
+
+              <div class="form-group">
+                <label >Mobile Number</label>
+                <input type="text" class="form-control"  placeholder="phone number" name="mobile">
+              </div>
+
+              <div class="form-group">
+                <label >Permanent address</label>
+                <input type="text" class="form-control"  placeholder="Address" name="address">
+              </div>
+
+
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    </form>
+
+{% endblock main %}

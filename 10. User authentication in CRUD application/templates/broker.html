@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+    <h2>This is Broker page </h2>
+
+    <div class="col-md-7">
+    <form action="{% url "about" %}" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-outline-info mt-2 ml-5" type="Submit">Submit</button>
+    </form>
+    </div>
+
+{% endblock main %}

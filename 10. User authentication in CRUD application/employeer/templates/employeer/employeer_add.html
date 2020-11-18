@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block main %}
+    <div class="card">
+      <div class="card-header">
+        {{action}}
+      </div>
+      <div class="card-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+            {{form|crispy}}
+
+            <a  class="btn btn-danger" href="{% url 'employeer-home' %}">Cancel</a>
+            <button type="submit" class="btn btn-outline-info">Submit</button>
+        </form>
+        </div>
+    </div>
+
+{% endblock main %}
