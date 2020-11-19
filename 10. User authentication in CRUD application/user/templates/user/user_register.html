@@ -2,10 +2,20 @@
 {% load crispy_forms_tags%}
 
 {% block main %}
-
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form|crispy }}
-        <button class="btn btn-primary" type="submit">Register</button>
-    </form>
+        <!-- Modal -->
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register new User</h5>
+                </div>
+                <div class="modal-body">
+                    {{ form|crispy }}
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
 {% endblock %}
