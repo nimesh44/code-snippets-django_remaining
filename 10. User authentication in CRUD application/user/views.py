@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserLogin
+from django.contrib.auth import authenticate,login
 
 
 
@@ -54,6 +55,18 @@ def user_register(request):
 
 
 def user_login(request):
+    if request.method == 'POST':
+        form = UserLogin(request.POST)
+        print(form)
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(request,username = data['username'],password = data['password'])
+            print(user)
+            # IF USER EXIST IN MODEL
+            if user is not None:
+                login(request,user)
+                return redirect('home')
+
     form = UserLogin()
     context = {
         'form': form,
