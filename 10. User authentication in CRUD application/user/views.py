@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UserLogin
 
 
 
@@ -16,7 +17,7 @@ class UserCreateForm(UserCreationForm):
             self.fields[fieldname].help_text = None
 
 
-def register_users(request):
+def user_register(request):
     if request.method == 'POST':
         data = UserCreateForm(request.POST)
         if data.is_valid():
@@ -37,7 +38,7 @@ def register_users(request):
 
 
 # # views to avoid removing help text
-# def register_users(request):
+# def user_register(request):
 #     if request.method == 'POST':
 #         data = UserCreationForm(request.POST)
 #         if data.is_valid():
@@ -49,3 +50,12 @@ def register_users(request):
 #             'form': form,
 #     }
 #     return render(request,'user/user_register.html',context)
+
+
+
+def user_login(request):
+    form = UserLogin()
+    context = {
+        'form': form,
+    }
+    return render(request,'user/user_login.html',context)

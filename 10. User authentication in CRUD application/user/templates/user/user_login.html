@@ -8,14 +8,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Register new User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
                 </div>
                 <div class="modal-body">
-                    {{ form|crispy }}
-                        <button class="btn btn-primary mr-4" type="submit">Register</button>
-                             Already have an user account? <small class="ml-8"><a href="{% url "user-login" %}">Login</a></small>
-                    
+                    {{form|crispy}}
+                        <button class="btn btn-primary mr-4" type="submit">Login</button>
+                        Don't have an account?  <small><a href="{% url "user-register" %}">Register Here</a></small>
+
                     </div>
+                    
                 </div>
                 </div>
 {% endblock %}
