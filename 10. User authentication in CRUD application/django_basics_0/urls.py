@@ -33,4 +33,5 @@ urlpatterns = [
     path('employeer/employeer_add/',employeer_add,name="employeer-add"),
     path('employeer/employeer_update/<int:id>/',employeer_update,name="employeer-update"),
     path('employeer/employeer_delete/<int:id>/',employeer_delete,name="employeer-delete"),
+    path('users/',include('user.urls')),
 ]
