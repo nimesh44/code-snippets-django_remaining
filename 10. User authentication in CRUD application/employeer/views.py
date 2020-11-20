@@ -2,8 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import EmployeerForm
 from .models import Employeer
-
-
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -16,7 +15,6 @@ def employeer(request):
         email = data['email']
         mobile = data['mobile']
         address = data['address']
-
         # save objects to Employeer model in database
         obj = Employeer.objects.create(first_name= first_name,last_name=last_name,email=email,
               mobile= mobile,address = address)
@@ -32,7 +30,6 @@ def employeer(request):
             'form':form,
             'employeers':Employeers,
         }
-
     return render(request,'employeer/employeer.html',context)
 
     # if request.method = request.POST:
@@ -45,7 +42,7 @@ def employeer(request):
     # else:
     #     return render(request,'employeer/employeer.html')
 
-
+@login_required
 def employeer_add(request):
     form = EmployeerForm()
     if request.method == 'POST':
@@ -53,13 +50,14 @@ def employeer_add(request):
         if employeer_data.is_valid():
             employeer_data.save()
             return redirect('employeer-home')
-
     context = {
     'form':form,
     'action':'Add New employeer'
     }
     return render(request,'employeer/employeer_add.html',context)
 
+
+@login_required
 def employeer_update(request,id):
     instance  = Employeer.objects.get(id=id)
     form = EmployeerForm(instance=instance)
@@ -75,12 +73,12 @@ def employeer_update(request,id):
     # Using template similar to add for update employeer
     return render(request,'employeer/employeer_add.html',context)
 
+@login_required
 def employeer_delete(request,id):
     employeer_instance = Employeer.objects.get(id=id)
     if request.method == 'POST':
         employeer_instance.delete()
         return redirect('employeer-home')
-
     context ={
         'employeer': employeer_instance,
         }

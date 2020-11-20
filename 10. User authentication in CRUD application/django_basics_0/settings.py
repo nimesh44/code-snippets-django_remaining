@@ -130,3 +130,6 @@ STATICFILES_DIRS = [
 
 # Changing css framework to bootstrap4
 CRISPY_TEMPLATE_PACK ='bootstrap4'
+
+LOGIN_URL = "user-login"
+LOGIN_REDIRECT_URL ="home"

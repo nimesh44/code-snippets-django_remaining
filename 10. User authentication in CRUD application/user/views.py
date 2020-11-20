@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserLogin
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 
 
 
@@ -72,3 +72,9 @@ def user_login(request):
         'form': form,
     }
     return render(request,'user/user_login.html',context)
+
+
+def user_logout(request):
+    # To logout user
+    logout(request)
+    return redirect('user-login')
