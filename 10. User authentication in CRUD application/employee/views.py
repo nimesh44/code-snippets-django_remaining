@@ -3,15 +3,13 @@ from django.http import HttpResponse
 from .forms import EmployeeForm
 from .models import Employee
 from employeer.models import Employeer
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
-
 def home(request):
     employee_count = Employee.objects.all().count()
     employeer_count = Employeer.objects.all().count()
-
     context={
         'employee_count': employee_count,
         'employeer_count': employeer_count,
@@ -38,15 +36,12 @@ def employee(request):
         email = data['email']
         mobile = data['mobile']
         address = data['address']
-
         # adding data to database/model
         obj = Employee.objects.create(first_name = first_name, last_name = last_name,email = email,
                mobile = mobile, address = address)
-
         if obj:# If object is created then redirect to /employee
             # redirect is alternative of render
             return redirect('employee-home')
-
     else:
         Employees = Employee.objects.all()
         form = EmployeeForm()
@@ -73,17 +68,13 @@ def about(request):
         last_name = data.get('last_name')
         email = data['email']
         address = data.get('address')
-
         context_ ={
             'title':'employeer',
             'first_name':first_name,
             'last_name':last_name,
             'email': email,
             'address':address,
-
         }
-
-
     else:
         context_ ={
             'title':'employeer',
@@ -96,8 +87,6 @@ def about(request):
     return render(request,'about.html',context_)
 
 
-
-
 def contact(request):
     return render(request,'contact.html')
 
@@ -105,6 +94,7 @@ def contact(request):
 # one way of of getting id/any other info is
 # def employee_update(request,**kwar):
 # Alternative way
+@login_required
 def employee_update(request,id):
     employee_obj = Employee.objects.get(id=id)
     # print(id)
@@ -118,20 +108,17 @@ def employee_update(request,id):
         employee_obj.save()
         # print(employee_obj.first_name)
         return redirect('employee-home')
-
     context={
         'employee':employee_obj,
     }
     return render(request,'employee/employee_update.html',context)
 
-
+@login_required
 def employee_delete(request,id):
     employee_object = Employee.objects.get(id=id)
-
     if request.method == 'POST':
         employee_object.delete()
         return redirect('employee-home')
-
     context ={
         'employee':employee_object
     }

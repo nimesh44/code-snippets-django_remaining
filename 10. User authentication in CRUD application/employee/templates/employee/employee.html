@@ -3,10 +3,12 @@
 {% block main %}
 <h2>Welcome to Employee page</h2>
 
+{% if user.is_authenticated %}
     <div class="text-right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New
         </button>
     </div>
+{% endif %}
 
     <form action="" method="POST">
     {% csrf_token%}
@@ -25,7 +27,9 @@
               <th scope="col">Email</th>
               <th scope="col">Mobile No</th>
               <th scope="col">Address</th>
+              {% if user.is_authenticated %}
               <th scope="col">Action</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -37,10 +41,12 @@
                 <td>{{ employee.email }}</td>
                 <td>{{ employee.mobile }}</td>
                 <td>{{ employee.address }}</td>
+                {% if user.is_authenticated %}
                 <td>
                 <a class="btn btn-outline-info btn-sm" href="{% url 'employee-update' employee.id %}">Update</a>
                 <a class="btn btn-danger btn-sm" href="{% url 'employee-delete' employee.id%}">Delete</a>
               </td>
+              {% endif %}
               </tr>
             {% endfor %}
 
@@ -50,7 +56,7 @@
       </div>
     </div>
 
-
+    {% if user.is_authenticated %}
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -86,9 +92,6 @@
                 <input type="text" class="form-control"  placeholder="Address" name="address">
               </div>
 
-
-
-
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
@@ -97,6 +100,8 @@
       </div>
      </div>
     </div>
+    {% endif %}
     </form>
+    
 
 {% endblock main %}

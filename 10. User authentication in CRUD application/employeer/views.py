@@ -7,8 +7,6 @@ from .models import Employeer
 
 
 
-
-
 # Create your views here.
 def employeer(request):
     if request.method == 'POST':
