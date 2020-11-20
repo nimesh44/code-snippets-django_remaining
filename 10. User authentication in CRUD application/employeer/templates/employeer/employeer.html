@@ -2,10 +2,12 @@
 {% load crispy_forms_tags %}
 {% block main %}
     <h2>This is Employeer page</h2>
+    {% if user.is_authenticated %}
         <div class="text-right">
         <a href="{% url "employeer-add" %}" class="btn btn-primary" >Add New
         </a>
     </div>
+    {% endif %}
 
     <form action="" method="POST">
     {% csrf_token%}
@@ -24,7 +26,9 @@
               <th scope="col">Email</th>
               <th scope="col">Address</th>
               <th scope="col">Mobile No</th>
-              <th scope="col">Action</th>
+              {% if user.is_authenticated %}
+               <th scope="col">Action</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -36,11 +40,14 @@
                 <td>{{ employeer.email }}</td>
                 <td>{{ employeer.mobile }}</td>
                 <td>{{ employeer.address }}</td>
-                <td><a class="btn btn-outline-info btn-sm" href="{% url 'employeer-update' employeer.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm" href="{% url 'employeer-delete' employeer.id %}">Delete</a>
+
+                {% if user.is_authenticated %}
+                  <td><a class="btn btn-outline-info btn-sm" href="{% url 'employeer-update' employeer.id %}">Update</a>
+                      <a class="btn btn-danger btn-sm" href="{% url 'employeer-delete' employeer.id %}">Delete</a>
 
 
-                </td>
+                  </td>
+                {% endif %}
             </tr>
             {% endfor %}
 
