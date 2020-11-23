@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserLoginForm,ProfileForm
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -79,14 +80,30 @@ def user_logout(request):
     logout(request)
     return redirect('user-login')
 
-
+@login_required
 def user_profile(request):
+    if request.method == 'POST':
+        data = request.POST
+        first_name = data['first_name']
+        last_name = data['last_name']
+        email = data['email']
+        # Find user object
+        user_obj = User.objects.get(id = request.user.id)
+        user_obj.first_name = first_name
+        user_obj.last_name = last_name
+        user_obj.email = email
+        user_obj.save()
+        return redirect('user-profile')
+
+    # Form initialization
     form = ProfileForm(initial = {
                     'first_name':request.user.first_name,
                     'last_name': request.user.last_name,
                     'email':request.user.email,
                 })
+    user_info = User.objects.get(id = request.user.id)
     context = {
-        'form':form
+        'form':form,
+        'user_info': user_info,
     }
     return render(request,'user/user_profile.html',context)
