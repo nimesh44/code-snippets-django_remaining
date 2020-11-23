@@ -8,29 +8,25 @@
       </div>
       <div class="card-body">
         <div class="container bootstrap snippet">
+            <form class="form" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
             <div class="row">
             <div class="col-sm-4">
                 <div class="text-center" >
-
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                    <h6>Upload your picture......</h6>
-                    <input type="file" class="text-center center-block file-upload">
-
+                    <h6>Upload your </h6>
+                    {{profile_image_form|crispy}}
                 </div>
             </div>
-
             <div class="col-sm-8">
-                <form class="form" method="POST">
-                    {%csrf_token%}
-                    <div class="form-group">
-                        {{form|crispy}}
-
-                    </div>
-                    <button class="btn btn-outline-info" type="submit">Update</button>
-                </form>
+                <div class="form-group">
+                    {{form|crispy}}
+                </div>
+                <button class="btn btn-outline-info" type="submit">Update</button>
             </div>
         </div>
         </div>
       </div>
+      </form>
     </div>
 {% endblock %}

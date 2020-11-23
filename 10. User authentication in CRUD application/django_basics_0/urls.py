@@ -18,7 +18,8 @@ from django.urls import path,include
 from django.http import HttpResponse
 from employeer.views import employeer,employeer_add,employeer_update,employeer_delete
 # from employee.views import employee
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 # def home(request):
@@ -34,4 +35,5 @@ urlpatterns = [
     path('employeer/employeer_update/<int:id>/',employeer_update,name="employeer-update"),
     path('employeer/employeer_delete/<int:id>/',employeer_delete,name="employeer-delete"),
     path('users/',include('user.urls')),
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

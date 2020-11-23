@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserLoginForm,ProfileForm
+from .forms import UserLoginForm,ProfileForm,ProfileImageModelForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -83,10 +83,20 @@ def user_logout(request):
 @login_required
 def user_profile(request):
     if request.method == 'POST':
+        profile_form = ProfileImageModelForm(request.POST,request.FILES,instance = request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+
+        # Getting files
+        profile_img_files = request.FILES
+        print(profile_img_files)
+        print(profile_img_files.get('image'))
+
         data = request.POST
         first_name = data['first_name']
         last_name = data['last_name']
         email = data['email']
+
         # Find user object
         user_obj = User.objects.get(id = request.user.id)
         user_obj.first_name = first_name
@@ -102,8 +112,10 @@ def user_profile(request):
                     'email':request.user.email,
                 })
     user_info = User.objects.get(id = request.user.id)
+    profile_image_form = ProfileImageModelForm()
     context = {
         'form':form,
         'user_info': user_info,
+        'profile_image_form':profile_image_form,
     }
     return render(request,'user/user_profile.html',context)

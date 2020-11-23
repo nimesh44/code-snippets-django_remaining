@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE)
     phone = models.CharField(max_length = 20)
-
+    image = models.ImageField(null =True,blank =True)
 
     # To show username in admin interface
     def __str__(self):
