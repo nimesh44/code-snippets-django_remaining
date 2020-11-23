@@ -36,4 +36,8 @@ urlpatterns = [
     path('employeer/employeer_delete/<int:id>/',employeer_delete,name="employeer-delete"),
     path('users/',include('user.urls')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# SECURITY WARNING: don't run with debug turned on in production!
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
