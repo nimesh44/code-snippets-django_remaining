@@ -112,7 +112,9 @@ def user_profile(request):
                     'email':request.user.email,
                 })
     user_info = User.objects.get(id = request.user.id)
-    profile_image_form = ProfileImageModelForm()
+    profile_image_form = ProfileImageModelForm({
+        'image': request.user.profile.image.url
+        })
     context = {
         'form':form,
         'user_info': user_info,
