@@ -81,7 +81,11 @@ def user_logout(request):
 
 
 def user_profile(request):
-    form = ProfileForm()
+    form = ProfileForm(initial = {
+                    'first_name':'Netra Prasad',
+                    'last_name': 'Neupane',
+                    'email':'npn@company.com',
+                })
     context = {
         'form':form
     }
